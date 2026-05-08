@@ -1,8 +1,10 @@
+#include "../include/transactions.h"
+
 #include <iostream>
 #include <limits>
 
 void printHomePage();
-
+    
 int main() {
     int choice;
     
@@ -51,3 +53,4 @@ void printHomePage() {
     std::cout << "4. Reports\n";\
     std::cout << "5. Exit\n";
 }
+
