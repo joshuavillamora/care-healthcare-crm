@@ -5,7 +5,7 @@
 #include <cctype>
 using namespace std;
 
-ifstream file("transhistory.csv");
+ifstream file("transactions.csv");
 string line;
 int main() {	
 	cout << "- Transaction History -" << "\n";
