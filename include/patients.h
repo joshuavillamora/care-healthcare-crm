@@ -2,9 +2,12 @@
 #define PATIENTS_H
 
 #include <string>
+#include <vector>
+#include <fstream>
+#include <sstream>
 
 struct Patient {
-   int id;
+   // int id; - temporarily remove id
    std::string name;
    std::string phone;
    std::string email;
@@ -12,7 +15,10 @@ struct Patient {
    std::string address;
 };
 
+extern std::vector<Patient> patients;
+
 void printPatientManagementMenu();
 void addPatientRecords();
+void savePatientRecords();
 
 #endif

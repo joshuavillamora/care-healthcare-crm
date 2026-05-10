@@ -73,6 +73,7 @@ void patientManagementModule() {
         switch (choice) {
             case 1:
                 addPatientRecords();
+                savePatientRecords();
                 break;
             case 2:
                 std::cout << "This is view all patients option.\n";
