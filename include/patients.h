@@ -1,0 +1,25 @@
+#ifndef PATIENTS_H
+#define PATIENTS_H
+
+#include <string>
+#include <vector>
+#include <fstream>
+#include <sstream>
+
+struct Patient {
+   // int id; - temporarily remove id
+   std::string name;
+   std::string phone;
+   std::string email;
+   int age;
+   std::string address;
+};
+
+extern std::vector<Patient> patients;
+
+void printPatientManagementMenu();
+void addPatientRecords();
+void savePatientRecords();
+void loadPatientRecords();
+
+#endif
