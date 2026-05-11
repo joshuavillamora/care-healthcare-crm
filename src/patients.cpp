@@ -2,6 +2,11 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <vector>
+#include <fstream>
+#include <sstream>
+
+std::vector<Patient> patients;
 
 void printPatientManagementMenu() {
     std::cout << "=================================\n";
@@ -18,19 +23,68 @@ void addPatientRecords() {
     Patient p;
 
     system("cls");
-    
+
     std::cout << "==================================\n";
     std::cout << "           ADD PATIENT\n";
     std::cout << "==================================\n";
 
+    std::cin.ignore();
+
     std::cout << "Enter Full Name: ";
-    std::cin >> p.name;
+    std::getline(std::cin, p.name);
+
     std::cout << "Enter Phone Number: ";
-    std::cin >> p.phone;
+    std::getline(std::cin, p.phone);
+
     std::cout << "Enter Email: ";
-    std::cin >> p.email;
+    std::getline(std::cin, p.email);
+
     std::cout << "Enter Age: ";
     std::cin >> p.age;
+    std::cin.ignore();
+
     std::cout << "Address: ";
-    std::cin >> p.address;
+    std::getline(std::cin, p.address);
+
+    patients.push_back(p);
 }
+
+void savePatientRecords() {
+    std::ofstream file("data/patients.csv");
+    for (Patient& p : patients) {
+        file << p.name << ','
+             << p.phone << ','
+             << p.email << ','
+             << p.age << ','
+             << p.address << '\n';
+    }
+    file.close();
+}
+
+void loadPatientRecords() {
+    std::ifstream file("data/patients.csv");
+    std::string line;
+    Patient p;
+    std::string age;
+
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+
+        std::getline(ss, p.name, ',');
+        std::getline(ss, p.phone, ',');
+        std::getline(ss, p.email, ',');
+        std::getline(ss, age, ',');
+        std::getline(ss, p.address, '\n');
+
+        p.age = std::stoi(age);
+
+        patients.push_back(p);
+    }
+
+    file.close();
+}
+
+/*
+g++ src/main.cpp src/patients.cpp src/interactions.cpp -Iinclude -o CARE
+./CARE
+*/
