@@ -60,6 +60,30 @@ void savePatientRecords() {
     }
     file.close();
 }
+
+void loadPatientRecords() {
+    std::ifstream file("data/patients.csv");
+    std::string line;
+    Patient p;
+    std::string age;
+
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+
+        std::getline(ss, p.name, ',');
+        std::getline(ss, p.phone, ',');
+        std::getline(ss, p.email, ',');
+        std::getline(ss, age, ',');
+        std::getline(ss, p.address, '\n');
+
+        p.age = std::stoi(age);
+
+        patients.push_back(p);
+    }
+
+    file.close();
+}
+
 /*
 g++ src/main.cpp src/patients.cpp src/interactions.cpp -Iinclude -o CARE
 ./CARE

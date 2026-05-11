@@ -60,6 +60,8 @@ void printHomePage() {
 void patientManagementModule() {
     int choice;
     
+    loadPatientRecords();
+    
     do {
         printPatientManagementMenu();
 

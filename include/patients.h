@@ -20,5 +20,6 @@ extern std::vector<Patient> patients;
 void printPatientManagementMenu();
 void addPatientRecords();
 void savePatientRecords();
+void loadPatientRecords();
 
 #endif
