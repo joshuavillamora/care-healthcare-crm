@@ -14,7 +14,7 @@ struct Transaction {
 };      
 
 //menu
-void transactionManagement(std::vector <Transaction>& transactions);
+void transactionManagement();
 
 //CRUD operations
 void addTransaction (std::vector <Transaction>& transactions);

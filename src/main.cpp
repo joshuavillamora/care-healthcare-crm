@@ -7,9 +7,11 @@ void printHomePage();
     
 int main() {
     int choice;
+
     
+
     do {
-    std::vector<Transaction> transactions;
+    
         printHomePage();
 
         std::cin >> choice;
@@ -24,7 +26,7 @@ int main() {
                 std::cout << "This is the Patient Management Module.\n";
                 break;
             case 2:                
-                transactionManagement(transactions);
+                transactionManagement();
                 break;
             case 3:
                 std::cout << "This is the Interaction Logging Module.\n";
@@ -51,6 +53,6 @@ void printHomePage() {
     std::cout << "1. Patient Management\n";
     std::cout << "2. Transaction Management\n";
     std::cout << "3. Interaction Logs\n";
-    std::cout << "4. Reports\n";\
+    std::cout << "4. Reports\n";
     std::cout << "5. Exit\n";
 }

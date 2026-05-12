@@ -4,14 +4,16 @@
 #include <iomanip>
 #include <limits>
 
+std::vector<Transaction> transactions;
+
 // MENU
-void transactionManagement(std::vector<Transaction>& transactions) {
+void transactionManagement() {
 
     int choice;
 
     do {
 
-        std::cout << "\n=============================\n";
+        std::cout << "=============================\n";
         std::cout << "    TRANSACTION MANAGEMENT\n";
         std::cout << "=============================\n";
         std::cout << "1. Add Transaction\n";
@@ -84,7 +86,7 @@ void addTransaction(std::vector<Transaction>& transactions) {
     std::cout << "      ADD TRANSACTION\n";
     std::cout << "=============================\n";
 
-    std::cout << "Transaction ID: " << t.id << "\n";
+    std::cout << "Transaction ID () " << t.id << "\n";
     // PATIENT ID
     std::cout << "Enter Patient ID: ";
 
