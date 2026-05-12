@@ -44,6 +44,15 @@ void saveTransactionRecords() {
     );
 }
 
+//get next ID 
+static int getNextId() {
+    if (transactions.empty()) return 1;
+    int maxId = 0;
+    for (const Transaction& t : transactions)
+        maxId = std::max(maxId, t.id);
+    return maxId + 1;
+}
+
 void loadTransactionRecords() {
     transactions.clear();
     loadRecords<Transaction>(
