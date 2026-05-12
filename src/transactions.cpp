@@ -10,6 +10,7 @@ std::vector<Transaction> transactions;
 
 static const std::string TRANSACTIONS_FILE = "transactions.csv";
 
+//Serialization
 std::string serializeTransaction(const Transaction& t) {
     return std::to_string(t.id)          + "|" +
            std::to_string(t.patientId)   + "|" +
@@ -17,6 +18,39 @@ std::string serializeTransaction(const Transaction& t) {
            std::to_string(t.amount)      + "|" +
            t.serviceType                 + "|" +
            t.description;
+}
+//Deserialization
+Transaction deserializeTransaction(const std::string& line) {
+    Transaction t;
+    std::stringstream ss(line);
+    std::string token;
+
+    std::getline(ss, token, '|'); t.id          = std::stoi(token);
+    std::getline(ss, token, '|'); t.patientId   = std::stoi(token);
+    std::getline(ss, token, '|'); t.date        = token;
+    std::getline(ss, token, '|'); t.amount      = std::stof(token);
+    std::getline(ss, token, '|'); t.serviceType = token;
+    std::getline(ss, token, '|'); t.description = token;
+
+    return t;
+}
+
+//Persitence
+void saveTransactionRecords() {
+    saveRecords<Transaction>(
+        TRANSACTIONS_FILE,
+        transactions,
+        serializeTransaction
+    );
+}
+
+void loadTransactionRecords() {
+    transactions.clear();
+    loadRecords<Transaction>(
+        TRANSACTIONS_FILE,
+        transactions,
+        deserializeTransaction
+    );
 }
 
 // MENU
