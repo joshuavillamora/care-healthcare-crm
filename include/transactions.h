@@ -22,6 +22,8 @@ void viewTransactions (const std::vector <Transaction>& transactions);
 void editTransaction (std::vector <Transaction>& transactions);
 void deleteTransaction (std::vector <Transaction>& transactions);
 
-
+// persistence 
+void saveTransactionRecords();
+void loadTransactionRecords();
 
 #endif
