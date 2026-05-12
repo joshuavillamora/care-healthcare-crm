@@ -80,8 +80,6 @@ void transactionManagement() {
         std::cout << "Enter choice: ";
 
         std::cin >> choice;
-
-        // INPUT VALIDATION
         while (std::cin.fail()) {
 
             std::cout << "Invalid input. Enter a number: ";
@@ -97,6 +95,7 @@ void transactionManagement() {
 
             case 1:
                 addTransaction(transactions);
+                saveTransactionRecords();
                 break;
 
             case 2:
@@ -105,10 +104,12 @@ void transactionManagement() {
 
             case 3:
                 editTransaction(transactions);
+                saveTransactionRecords();
                 break;
 
             case 4:
                 deleteTransaction(transactions);
+                saveTransactionRecords();
                 break;
 
             case 5:
