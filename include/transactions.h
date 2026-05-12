@@ -11,10 +11,10 @@ struct Transaction {
     float amount;
     std::string serviceType;
     std::string description;
-};
+};      
 
 //menu
-void transactionsManagement();
+void transactionManagement(std::vector <Transaction>& transactions);
 
 //CRUD operations
 void addTransaction (std::vector <Transaction>& transactions);
