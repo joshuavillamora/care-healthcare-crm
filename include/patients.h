@@ -21,5 +21,8 @@ void printPatientManagementMenu();
 void addPatientRecords();
 void savePatientRecords();
 void loadPatientRecords();
+std::string serializePatientRecord(const Patient& p);
+Patient deserializePatientRecord(const std::string& line);
+void viewPatientRecords();
 
 #endif

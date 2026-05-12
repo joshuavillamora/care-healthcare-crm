@@ -1,14 +1,18 @@
 #include "../include/patients.h"
+#include "../include/database.h"
 
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 
 std::vector<Patient> patients;
 
 void printPatientManagementMenu() {
+    system("cls");
+
     std::cout << "=================================\n";
     std::cout << "       PATIENT MANAGEMENT\n";
     std::cout << "=================================\n";
@@ -49,42 +53,59 @@ void addPatientRecords() {
     patients.push_back(p);
 }
 
-void savePatientRecords() {
-    std::ofstream file("data/patients.csv");
-    for (Patient& p : patients) {
-        file << p.name << ','
-             << p.phone << ','
-             << p.email << ','
-             << p.age << ','
-             << p.address << '\n';
-    }
-    file.close();
+std::string serializePatientRecord(const Patient& p) {
+    return p.name + "|" + p.phone + "|" + p.email + "|" + std::to_string(p.age) + "|" + p.address;
 }
 
-void loadPatientRecords() {
-    std::ifstream file("data/patients.csv");
-    std::string line;
+Patient deserializePatientRecord(const std::string& line) {
     Patient p;
     std::string age;
 
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
+    std::stringstream ss(line);
 
-        std::getline(ss, p.name, ',');
-        std::getline(ss, p.phone, ',');
-        std::getline(ss, p.email, ',');
-        std::getline(ss, age, ',');
-        std::getline(ss, p.address, '\n');
+    std::getline(ss, p.name, ',');
+    std::getline(ss, p.phone, ',');
+    std::getline(ss, p.email, ',');
+    std::getline(ss, age, ',');
+    std::getline(ss, p.address, '\n');
 
-        p.age = std::stoi(age);
+    p.age = std::stoi(age);
 
-        patients.push_back(p);
+    return p;
+}
+
+void savePatientRecords() {
+    saveRecords<Patient>("data/patients.csv", patients, serializePatientRecord);
+}
+
+void loadPatientRecords() {
+    loadRecords<Patient>("data/patients.csv", patients, deserializePatientRecord);
+}
+
+void viewPatientRecords() {
+    system("cls");
+
+    std::cout << std::left
+              << std::setw(25) << "Name"
+              << std::setw(20) << "Phone"
+              << std::setw(35) << "Email"
+              << std::setw(10) << "Age"
+              << std::setw(40) << "Address" << "\n";
+              
+    for (Patient& p : patients) {
+        std::cout << std::left
+                  << std::setw(25) << p.name
+                  << std::setw(20) << p.phone
+                  << std::setw(35) << p.email
+                  << std::setw(10) << p.age
+                  << std::setw(40) << p.address << "\n";
     }
-
-    file.close();
+    std::cout << "Press enter to continue...";
+    std::cin.ignore();
+    std::cin.get();
 }
 
 /*
-g++ src/main.cpp src/patients.cpp src/interactions.cpp -Iinclude -o CARE
+g++ src/main.cpp src/patients.cpp src/interactions.cpp src/database.cpp -Iinclude -o CARE
 ./CARE
 */
