@@ -127,68 +127,40 @@ void transactionManagement() {
 
 // ADD TRANSACTION
 void addTransaction(std::vector<Transaction>& transactions) {
-
-    // PERSISTS BETWEEN FUNCTION CALLS
-    static int nextId = 1;
-
     Transaction t;
-
-    // AUTO-GENERATED ID
-    t.id = nextId;
-
-    // PREPARE NEXT AVAILABLE ID
-    nextId++;
+    t.id = getNextId();     // ← derived from database, not a static counter
 
     std::cout << "\n=============================\n";
     std::cout << "      ADD TRANSACTION\n";
     std::cout << "=============================\n";
+    std::cout << "Transaction ID: " << t.id << "\n";
 
-    std::cout << "Transaction ID () " << t.id << "\n";
-    // PATIENT ID
     std::cout << "Enter Patient ID: ";
-
     while (!(std::cin >> t.patientId)) {
-
         std::cout << "Invalid input. Enter a number: ";
-
         std::cin.clear();
-
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-
-    // CLEAR BUFFER BEFORE GETLINE
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    // DATE
     std::cout << "Enter Date (MM/DD/YYYY): ";
     std::getline(std::cin, t.date);
 
-    // AMOUNT
     std::cout << "Enter Amount: ";
-
-    while (!(std::cin >> t.amount)) {
-
-        std::cout << "Invalid input. Enter a number: ";
-
+    while (!(std::cin >> t.amount) || t.amount < 0) {
+        std::cout << "Invalid input. Enter a non-negative number: ";
         std::cin.clear();
-
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-
-    // CLEAR BUFFER
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    // SERVICE TYPE
     std::cout << "Enter Service Type: ";
     std::getline(std::cin, t.serviceType);
 
-    // DESCRIPTION
     std::cout << "Enter Description: ";
     std::getline(std::cin, t.description);
 
-    // STORE
     transactions.push_back(t);
-
     std::cout << "\nTransaction added successfully.\n";
 }
 
