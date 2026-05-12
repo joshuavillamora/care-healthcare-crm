@@ -1,5 +1,6 @@
 #include "../include/patients.h"
 #include "../include/interactions.h"
+#include "../include/transactions.h"
 
 #include <iostream>
 #include <limits>
@@ -10,8 +11,11 @@ void interactionsModule();
 
 int main() {
     int choice;
+
     
+
     do {
+    
         printHomePage();
 
         std::cin >> choice;
@@ -25,8 +29,8 @@ int main() {
             case 1:
                 patientManagementModule();
                 break;
-            case 2:
-                std::cout << "This is the Transaction Management Module.\n";
+            case 2:                
+                transactionManagement();
                 break;
             case 3:
                 interactionsModule();
@@ -53,7 +57,7 @@ void printHomePage() {
     std::cout << "1. Patient Management\n";
     std::cout << "2. Transaction Management\n";
     std::cout << "3. Interaction Logs\n";
-    std::cout << "4. Reports\n";\
+    std::cout << "4. Reports\n";
     std::cout << "5. Exit\n";
 }
 
