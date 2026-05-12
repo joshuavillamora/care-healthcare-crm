@@ -195,6 +195,39 @@ void editTransaction(std::vector<Transaction>& transactions) {
 
 // DELETE TRANSACTION
 void deleteTransaction(std::vector<Transaction>& transactions) {
+    if (transactions.empty()) {
+        std::cout << "\nNo transactions to delete.\n";
+        return;
+    }
 
-    std::cout << "\nDelete Transaction not implemented yet.\n";
+    std::cout << "\nEnter Transaction ID to delete: ";
+    int id;
+    while (!(std::cin >> id)) {
+        std::cout << "Invalid input. Enter a number: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    auto it = std::find_if(
+        transactions.begin(), transactions.end(),
+        [id](const Transaction& t) { return t.id == id; }
+    );
+
+    if (it == transactions.end()) {
+        std::cout << "\nTransaction ID " << id << " not found.\n";
+        return;
+    }
+
+    std::cout << "Delete transaction ID " << id << "? (y/n): ";
+    char confirm;
+    std::cin >> confirm;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    if (confirm == 'y' || confirm == 'Y') {
+        transactions.erase(it);
+        std::cout << "\nTransaction deleted successfully.\n";
+    } else {
+        std::cout << "\nDeletion cancelled.\n";
+    }
 }
