@@ -6,10 +6,13 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 
 std::vector<Patient> patients;
 
 void printPatientManagementMenu() {
+    system("cls");
+
     std::cout << "=================================\n";
     std::cout << "       PATIENT MANAGEMENT\n";
     std::cout << "=================================\n";
@@ -77,6 +80,29 @@ void savePatientRecords() {
 
 void loadPatientRecords() {
     loadRecords<Patient>("data/patients.csv", patients, deserializePatientRecord);
+}
+
+void viewPatientRecords() {
+    system("cls");
+
+    std::cout << std::left
+              << std::setw(25) << "Name"
+              << std::setw(20) << "Phone"
+              << std::setw(35) << "Email"
+              << std::setw(10) << "Age"
+              << std::setw(40) << "Address" << "\n";
+              
+    for (Patient& p : patients) {
+        std::cout << std::left
+                  << std::setw(25) << p.name
+                  << std::setw(20) << p.phone
+                  << std::setw(35) << p.email
+                  << std::setw(10) << p.age
+                  << std::setw(40) << p.address << "\n";
+    }
+    std::cout << "Press enter to continue...";
+    std::cin.ignore();
+    std::cin.get();
 }
 
 /*
