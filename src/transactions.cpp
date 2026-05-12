@@ -187,11 +187,76 @@ void viewTransactions(const std::vector<Transaction>& transactions) {
 }
 
 // EDIT TRANSACTION
+
 void editTransaction(std::vector<Transaction>& transactions) {
+    if (transactions.empty()) {
+        std::cout << "\nNo transactions to edit.\n";
+        return;
+    }
 
-    std::cout << "\nEdit Transaction not implemented yet.\n";
+    std::cout << "\nEnter Transaction ID to edit: ";
+    int id;
+    while (!(std::cin >> id)) {
+        std::cout << "Invalid input. Enter a number: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    for (Transaction& t : transactions) {
+        if (t.id != id) continue;
+
+        std::cout << "\n--- Current values ---\n";
+        std::cout << "Patient ID   : " << t.patientId   << "\n";
+        std::cout << "Date         : " << t.date        << "\n";
+        std::cout << "Amount       : " << t.amount      << "\n";
+        std::cout << "Service Type : " << t.serviceType << "\n";
+        std::cout << "Description  : " << t.description << "\n";
+        std::cout << "--- Enter new values (leave blank to keep current) ---\n";
+
+
+        // Patient ID
+        std::cout << "New Patient ID [" << t.patientId << "]: ";
+        std::string input;
+        std::getline(std::cin, input);
+        if (!input.empty()) {
+            try { t.patientId = std::stoi(input); }
+            catch (...) { std::cout << "Invalid — keeping original.\n"; }
+        }
+
+        // Date
+        std::cout << "New Date [" << t.date << "]: ";
+        std::getline(std::cin, input);
+        if (!input.empty()) t.date = input;
+
+        // Amount
+        std::cout << "New Amount [" << t.amount << "]: ";
+        std::getline(std::cin, input);
+        if (!input.empty()) {
+            try {
+                float val = std::stof(input);
+                if (val >= 0) t.amount = val;
+                else std::cout << "Negative amount — keeping original.\n";
+            }
+            catch (...) { std::cout << "Invalid — keeping original.\n"; }
+        }
+
+        // Service Type
+        std::cout << "New Service Type [" << t.serviceType << "]: ";
+        std::getline(std::cin, input);
+        if (!input.empty()) t.serviceType = input;
+
+        // Description
+        std::cout << "New Description [" << t.description << "]: ";
+        std::getline(std::cin, input);
+        if (!input.empty()) t.description = input;
+
+        std::cout << "\nTransaction updated successfully.\n";
+        return;
+    }
+
+    std::cout << "\nTransaction ID " << id << " not found.\n";
 }
-
 
 // DELETE TRANSACTION
 void deleteTransaction(std::vector<Transaction>& transactions) {
