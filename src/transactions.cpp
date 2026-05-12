@@ -1,10 +1,23 @@
 #include "../include/transactions.h"
+#include "../include/database.h"
 
 #include <iostream>
 #include <iomanip>
 #include <limits>
+#include <algorithm>
 
 std::vector<Transaction> transactions;
+
+static const std::string TRANSACTIONS_FILE = "transactions.csv";
+
+std::string serializeTransaction(const Transaction& t) {
+    return std::to_string(t.id)          + "|" +
+           std::to_string(t.patientId)   + "|" +
+           t.date                        + "|" +
+           std::to_string(t.amount)      + "|" +
+           t.serviceType                 + "|" +
+           t.description;
+}
 
 // MENU
 void transactionManagement() {
