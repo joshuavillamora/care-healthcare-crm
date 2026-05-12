@@ -112,8 +112,3 @@ void viewPatientRecords() {
     std::cin.ignore();
     std::cin.get();
 }
-
-/*
-g++ src/main.cpp src/patients.cpp src/interactions.cpp src/database.cpp src/transactions.cpp -Iinclude -o CARE
-./CARE
-*/
