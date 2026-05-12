@@ -6,6 +6,8 @@
 #include <fstream>
 #include <sstream>
 #include <functional>
+#include <functional>
+#include <algorithm>
 
 template <typename T>
 void saveRecords(const std::string& filepath, const std::vector<T>& records, std::function<std::string(const T&)> serializer) {
@@ -24,6 +26,15 @@ void loadRecords(const std::string& filepath, std::vector<T>& records, std::func
         records.push_back(deserializer(line));
     }
     file.close();
+}
+
+template <typename T>
+int getNextId(const std::vector<T>& records, std::function<int(const T&)> idSelector) {
+    if (records.empty()) return 1;
+    int maxId = 0;
+    for (const T& record : records)
+        maxId = std::max(maxId, idSelector(record));
+    return maxId + 1;
 }
 
 #endif
