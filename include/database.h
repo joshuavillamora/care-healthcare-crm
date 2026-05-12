@@ -28,8 +28,8 @@ void loadRecords(const std::string& filepath, std::vector<T>& records, std::func
     file.close();
 }
 
-template <typename T>
-int getNextId(const std::vector<T>& records, std::function<int(const T&)> idSelector) {
+template <typename T, typename F>
+int getNextId(const std::vector<T>& records, F idSelector) {
     if (records.empty()) return 1;
     int maxId = 0;
     for (const T& record : records)

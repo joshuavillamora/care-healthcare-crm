@@ -44,15 +44,6 @@ void saveTransactionRecords() {
     );
 }
 
-//get next ID 
-static int getNextId() {
-    if (transactions.empty()) return 1;
-    int maxId = 0;
-    for (const Transaction& t : transactions)
-        maxId = std::max(maxId, t.id);
-    return maxId + 1;
-}
-
 void loadTransactionRecords() {
     transactions.clear();
     loadRecords<Transaction>(
@@ -64,6 +55,7 @@ void loadTransactionRecords() {
 
 // MENU
 void transactionManagement() {
+     loadTransactionRecords();
 
     int choice;
 
@@ -124,11 +116,10 @@ void transactionManagement() {
     } while (choice != 5);
 }
 
-
 // ADD TRANSACTION
 void addTransaction(std::vector<Transaction>& transactions) {
     Transaction t;
-    t.id = getNextId();     // ← derived from database, not a static counter
+    t.id = getNextId (transactions, [](const Transaction& tx) { return tx.id; }); 
 
     std::cout << "\n=============================\n";
     std::cout << "      ADD TRANSACTION\n";
