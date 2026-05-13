@@ -35,7 +35,7 @@ bool deleteRecord(std::vector<T>& records, int id) {
     });
 
     if (it == records.end()) {
-        return false
+        return false;
     }
 
     records.erase(it, records.end());
