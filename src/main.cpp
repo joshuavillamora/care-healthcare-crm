@@ -85,7 +85,7 @@ void patientManagementModule() {
                 viewPatientRecords();
                 break;
             case 3:
-                std::cout << "This is update patient information.\n";
+                updatePatientRecord();
                 break;
             case 4:
                 std::cout << "This is delete patient record.\n";

@@ -24,5 +24,12 @@ void loadPatientRecords();
 std::string serializePatientRecord(const Patient& p);
 Patient deserializePatientRecord(const std::string& line);
 void viewPatientRecords();
+void updatePatientRecord();
+void showUpdateMenu(Patient& p);
+void updateName(Patient& p);
+void updateEmail(Patient& p);
+void updatePhone(Patient& p);
+void updateAge(Patient& p);
+void updateAddress(Patient& p);
 
 #endif
