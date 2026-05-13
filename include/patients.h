@@ -31,5 +31,6 @@ void updateEmail(Patient& p);
 void updatePhone(Patient& p);
 void updateAge(Patient& p);
 void updateAddress(Patient& p);
+void deletePatientRecord();
 
 #endif

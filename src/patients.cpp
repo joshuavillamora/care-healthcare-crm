@@ -302,3 +302,66 @@ void updateAddress(Patient& p) {
     
     std::cout << "Patient address successfully updated!\n";
 }
+
+void deletePatientRecord() {
+    int id;
+    bool found = false;
+
+    system("cls");
+    
+    std::cout << "===================================\n";
+    std::cout << "       DELETE PATIENT RECORD\n";
+    std::cout << "===================================\n";
+
+    std::cout << "Enter Patient ID to delete: ";
+    std::cin >> id;
+
+    for (Patient& p : patients) {
+        if (p.id != id) {
+            continue;
+        }
+
+        found = true;
+        system("cls");
+        std::cout << "===================================\n";
+        std::cout << "       PATIENT TO BE DELETED\n";
+        std::cout << "===================================\n";
+        std::cout << "ID:      " << p.id      << "\n";
+        std::cout << "Name:    " << p.name    << "\n";
+        std::cout << "Phone:   " << p.phone   << "\n";
+        std::cout << "Email:   " << p.email   << "\n";
+        std::cout << "Age:     " << p.age     << "\n";
+        std::cout << "Address: " << p.address << "\n\n";
+    }
+
+    if (!found) {
+        std::cout << "Patient ID not found.\n";
+        std::cout << "Press enter to continue...";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+
+    char choice;
+    bool valid = false;
+
+    do {
+        std::cout << "Are you sure you want to delete this patient record? (Y/N)\n";
+        std::cout << ">> ";
+        std::cin >> choice;
+        std::cin.ignore();
+        if (choice == 'y' || choice == 'Y') {
+            valid = true;
+            deleteRecord(patients, id);
+            savePatientRecords();
+            std::cout << "Patient deleted successfully.\n";
+        } else if (choice == 'n' || choice == 'N') {
+            valid = true;
+            std::cout << "Deletion cancelled...\n";
+        } else {    
+            std::cout << "Invalid input! Please enter Y or N.\n";
+        }
+    } while (!valid);
+
+    std::cout << "Press enter to continue...";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
