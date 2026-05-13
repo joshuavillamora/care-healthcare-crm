@@ -28,6 +28,20 @@ void loadRecords(const std::string& filepath, std::vector<T>& records, std::func
     file.close();
 }
 
+template <typename T>
+bool deleteRecord(std::vector<T>& records, int id) {
+    auto it = std::remove_if(records.begin(), records.end(), [id](const T& record) {
+        return record.id == id;
+    });
+
+    if (it == records.end()) {
+        return false
+    }
+
+    records.erase(it, records.end());
+    return true;
+}
+
 template <typename T, typename F>
 int getNextId(const std::vector<T>& records, F idSelector) {
     if (records.empty()) return 1;
