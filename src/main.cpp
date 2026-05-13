@@ -15,7 +15,7 @@ int main() {
     
 
     do {
-    
+        system("cls");
         printHomePage();
 
         std::cin >> choice;
