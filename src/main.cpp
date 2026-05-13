@@ -91,7 +91,7 @@ void patientManagementModule() {
                 deletePatientRecord();
                 break;
             case 5:
-                std::cout << "This is search patient records by id or name.\n";
+                searchPatientRecord();
                 break;
             case 6:
                 std::cout << "Going back to main menu...\n";

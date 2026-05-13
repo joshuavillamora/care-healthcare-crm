@@ -32,5 +32,7 @@ void updatePhone(Patient& p);
 void updateAge(Patient& p);
 void updateAddress(Patient& p);
 void deletePatientRecord();
+void searchPatientRecord();
+void searchPatientById();
 
 #endif

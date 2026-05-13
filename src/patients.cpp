@@ -366,3 +366,68 @@ void deletePatientRecord() {
     std::cout << "Press enter to continue...";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
+
+void searchPatientRecord() {
+    system("cls");
+
+    std::cout << "==================================\n";
+    std::cout << "          SEARCH PATIENT\n";
+    std::cout << "==================================\n";
+    std::cout << "1. Search by ID\n";
+    std::cout << "2. Search by Name\n";
+    std::cout << "3. Cancel\n";
+
+    int choice;
+    bool valid = false;
+    do {
+        std::cout << ">> ";
+        std::cin >> choice;
+        std::cin.ignore();
+
+        if (choice == 1) {
+            valid = true;
+            searchPatientById();
+        } else if (choice == 3) {
+            return;
+        } else {
+            std::cout << "Invalid input! Try again.\n";
+        }
+    } while (!valid);
+
+    std::cout << "Press enter to continue...";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+void searchPatientById() {
+    int id;
+    bool found = false;
+
+    std::cout << "Enter Patient ID: ";
+    std::cin >> id;
+    std::cin.ignore();
+
+    for (Patient& p : patients) {
+        if (p.id != id) {
+            continue;
+        }
+
+        found = true;
+        system("cls");
+        std::cout << "===================================\n";
+        std::cout << "        PATIENT INFORMATION\n";
+        std::cout << "===================================\n";
+        std::cout << "ID:      " << p.id      << "\n";
+        std::cout << "Name:    " << p.name    << "\n";
+        std::cout << "Phone:   " << p.phone   << "\n";
+        std::cout << "Email:   " << p.email   << "\n";
+        std::cout << "Age:     " << p.age     << "\n";
+        std::cout << "Address: " << p.address << "\n\n";
+    }
+
+    if (!found) {
+        std::cout << "Patient ID not found.\n";
+        std::cout << "Press enter to continue...";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+}
