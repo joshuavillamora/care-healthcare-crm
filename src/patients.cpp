@@ -22,6 +22,7 @@ void printPatientManagementMenu() {
     std::cout << "3. Update patient information\n";
     std::cout << "4. Delete patient record\n";
     std::cout << "5. Search patient by ID or name\n";
+    std::cout << "6. Exit to main menu\n";
 }
 
 void addPatientRecords() {
