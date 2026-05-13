@@ -15,7 +15,7 @@ int main() {
     
 
     do {
-    
+        system("cls");
         printHomePage();
 
         std::cin >> choice;
@@ -85,13 +85,13 @@ void patientManagementModule() {
                 viewPatientRecords();
                 break;
             case 3:
-                std::cout << "This is update patient information.\n";
+                updatePatientRecord();
                 break;
             case 4:
-                std::cout << "This is delete patient record.\n";
+                deletePatientRecord();
                 break;
             case 5:
-                std::cout << "This is search patient records by id or name.\n";
+                searchPatientRecord();
                 break;
             case 6:
                 std::cout << "Going back to main menu...\n";

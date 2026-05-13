@@ -7,7 +7,7 @@
 #include <sstream>
 
 struct Patient {
-   // int id; - temporarily remove id
+   int id;
    std::string name;
    std::string phone;
    std::string email;
@@ -24,5 +24,16 @@ void loadPatientRecords();
 std::string serializePatientRecord(const Patient& p);
 Patient deserializePatientRecord(const std::string& line);
 void viewPatientRecords();
+void updatePatientRecord();
+void showUpdateMenu(Patient& p);
+void updateName(Patient& p);
+void updateEmail(Patient& p);
+void updatePhone(Patient& p);
+void updateAge(Patient& p);
+void updateAddress(Patient& p);
+void deletePatientRecord();
+void searchPatientRecord();
+void searchPatientById();
+void searchPatientByName();
 
 #endif
