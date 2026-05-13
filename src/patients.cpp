@@ -387,7 +387,11 @@ void searchPatientRecord() {
         if (choice == 1) {
             valid = true;
             searchPatientById();
+        } else if (choice == 2) {
+            valid = true;
+            searchPatientByName();
         } else if (choice == 3) {
+            valid = true;
             return;
         } else {
             std::cout << "Invalid input! Try again.\n";
@@ -428,6 +432,38 @@ void searchPatientById() {
         std::cout << "Patient ID not found.\n";
         std::cout << "Press enter to continue...";
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+}
+
+void searchPatientByName() {
+    std::string name;
+    bool found = false;
+
+    std::cout << "Enter Patient Name: ";
+    std::getline(std::cin, name);
+
+    system("cls");
+
+    for (Patient& p : patients) {
+        if (p.name.find(name) == std::string::npos) {
+            continue;
+        }
+
+        found = true;
+        std::cout << "===================================\n";
+        std::cout << "        PATIENT INFORMATION\n";
+        std::cout << "===================================\n";
+        std::cout << "ID:      " << p.id      << "\n";
+        std::cout << "Name:    " << p.name    << "\n";
+        std::cout << "Phone:   " << p.phone   << "\n";
+        std::cout << "Email:   " << p.email   << "\n";
+        std::cout << "Age:     " << p.age     << "\n";
+        std::cout << "Address: " << p.address << "\n\n";
+    }
+
+    if (!found) {
+        std::cout << "No patients found.\n";
         return;
     }
 }

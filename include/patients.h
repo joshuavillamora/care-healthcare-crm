@@ -34,5 +34,6 @@ void updateAddress(Patient& p);
 void deletePatientRecord();
 void searchPatientRecord();
 void searchPatientById();
+void searchPatientByName();
 
 #endif
