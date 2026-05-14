@@ -124,3 +124,26 @@ std::string getCurrentTimestamp() {
     std::time_t end_time = std::chrono::system_clock::to_time_t(end);
     return std::ctime(&end_time);
 }
+
+std::string serializeInteractionRecord(const Interaction& i) {
+    return std::to_string(i.id) + "|" + std::to_string(i.patientId) + "|" + i.type + "|" + i.note + "|" + i.date + "|" + i.loggedAt;
+}
+
+Interaction deserializeInteractionRecord(const std::string& line) {
+    Interaction i;
+    std::string id, patientId;
+
+    std::stringstream ss(line);
+
+    std::getline(ss, id, '|');
+    std::getline(ss, patientId, '|');
+    std::getline(ss, i.type, '|');
+    std::getline(ss, i.note, '|');
+    std::getline(ss, i.date, '|');
+    std::getline(ss, i.loggedAt, '\n');
+
+    i.id = std::stoi(id);
+    i.patientId = std::stoi(patientId);
+
+    return i;
+}
