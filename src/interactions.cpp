@@ -110,15 +110,6 @@ void addInteractionRecord() {
     std::cout << "Interaction logged successfully!\n";
     std::cout << "Press enter to continue...";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-    for (const Interaction& interaction : interactions) {
-        std::cout << interaction.id << " | "
-                  << interaction.patientId << " | "
-                  << interaction.type << " | "
-                  << interaction.note << " | "
-                  << interaction.date << " | "
-                  << interaction.loggedAt << "\n";
-    }
 }
 
 std::string getCurrentTimestamp() {
