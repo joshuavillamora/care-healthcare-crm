@@ -19,5 +19,6 @@ std::string serializeInteractionRecord(const Interaction& i);
 Interaction deserializeInteractionRecord(const std::string& line);
 void saveInteractionLogs();
 void loadInteractionLogs();
+void viewInteractionLogs();
 
 #endif

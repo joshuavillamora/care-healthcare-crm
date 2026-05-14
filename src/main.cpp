@@ -124,7 +124,7 @@ void interactionsModule() {
                 addInteractionRecord();
                 break;
             case 2:
-                std::cout << "This is view all logs.\n";
+                viewInteractionLogs();
                 break;
             case 3:
                 std::cout << "This is view logs per patient.\n";

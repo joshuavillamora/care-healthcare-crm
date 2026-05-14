@@ -152,3 +152,24 @@ void saveInteractionLogs() {
 void loadInteractionLogs() {
     loadRecords<Interaction>("data/interactions.csv", interactions, deserializeInteractionRecord);
 }
+
+void viewInteractionLogs() {
+    system("cls");
+
+    std::cout << "================================================================\n";
+    std::cout << "                        INTERACTION LOGS\n";
+    std::cout << "================================================================\n";
+              
+    for (Interaction& i : interactions) {
+        Patient p;
+
+        std::cout << "[" << i.id << "] " << i.date << " | "
+                  << "Patient #" << i.patientId << " | "
+                  << i.type << "\n";
+        std::cout << "    Note: " << i.note << "\n";
+        std::cout << "    Logged at: " << i.loggedAt << "\n\n";
+    }
+    std::cout << "Press enter to continue...";
+    std::cin.ignore();
+    std::cin.get();
+}
