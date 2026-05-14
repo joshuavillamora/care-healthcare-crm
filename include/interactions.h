@@ -16,6 +16,6 @@ void printInteractionsMenu();
 void addInteractionRecord();
 std::string getCurrentTimestamp();
 std::string serializeInteractionRecord(const Interaction& i);
-Patient deserializeInteractionRecord(const std::string& line);
+Interaction deserializeInteractionRecord(const std::string& line);
 
 #endif
