@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <vector>
 #include <limits>
+#include <chrono>
+#include <ctime>
 
 std::vector<Interaction> interactions;
 
@@ -98,7 +100,7 @@ void addInteractionRecord() {
     std::cout << "Enter Interaction Date (YYYY-MM-DD): ";
     std::getline(std::cin, i.date);
 
-    i.loggedAt = "Timestamp Placeholder";
+    i.loggedAt = getCurrentTimestamp();
     i.id = getNextId(interactions, [](const Interaction& x) { return x.id; });
 
     interactions.push_back(i);
@@ -115,4 +117,10 @@ void addInteractionRecord() {
                   << interaction.date << " | "
                   << interaction.loggedAt << "\n";
     }
+}
+
+std::string getCurrentTimestamp() {
+    auto end = std::chrono::system_clock::now();
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+    return std::ctime(&end_time);
 }

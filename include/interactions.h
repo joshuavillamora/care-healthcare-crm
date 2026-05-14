@@ -14,5 +14,6 @@ struct Interaction {
 
 void printInteractionsMenu();
 void addInteractionRecord();
+std::string getCurrentTimestamp();
 
 #endif
