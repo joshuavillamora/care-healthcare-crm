@@ -1,6 +1,8 @@
 #ifndef INTERACTIONS_H
 #define INTERACTIONS_H
 
+#include <string>
+
 struct Interaction {
     int id;
     int patientId;
@@ -11,5 +13,6 @@ struct Interaction {
 };
 
 void printInteractionsMenu();
+void addInteractionRecord();
 
 #endif
