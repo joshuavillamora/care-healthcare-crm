@@ -105,6 +105,8 @@ void addInteractionRecord() {
 
     interactions.push_back(i);
 
+    saveInteractionLogs();
+
     std::cout << "Interaction logged successfully!\n";
     std::cout << "Press enter to continue...";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -122,7 +124,11 @@ void addInteractionRecord() {
 std::string getCurrentTimestamp() {
     auto end = std::chrono::system_clock::now();
     std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-    return std::ctime(&end_time);
+    std::string timestamp = std::ctime(&end_time);
+    if (!timestamp.empty() && timestamp.back() == '\n') {
+        timestamp.pop_back();
+    }
+    return timestamp;
 }
 
 std::string serializeInteractionRecord(const Interaction& i) {
@@ -146,4 +152,12 @@ Interaction deserializeInteractionRecord(const std::string& line) {
     i.patientId = std::stoi(patientId);
 
     return i;
+}
+
+void saveInteractionLogs() {
+    saveRecords<Interaction>("data/interactions.csv", interactions, serializeInteractionRecord);
+}
+
+void loadInteractionLogs() {
+    loadRecords<Interaction>("data/interactions.csv", interactions, deserializeInteractionRecord);
 }

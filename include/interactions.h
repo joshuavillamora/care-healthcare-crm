@@ -17,5 +17,7 @@ void addInteractionRecord();
 std::string getCurrentTimestamp();
 std::string serializeInteractionRecord(const Interaction& i);
 Interaction deserializeInteractionRecord(const std::string& line);
+void saveInteractionLogs();
+void loadInteractionLogs();
 
 #endif

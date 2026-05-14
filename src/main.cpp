@@ -106,6 +106,7 @@ void patientManagementModule() {
 void interactionsModule() {
     int choice;
     
+    loadInteractionLogs();
     loadPatientRecords();
 
     do {
