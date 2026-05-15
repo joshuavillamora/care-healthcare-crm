@@ -173,3 +173,67 @@ void viewInteractionLogs() {
     std::cin.ignore();
     std::cin.get();
 }
+
+void viewLogsByPatient() {
+    system("cls");
+
+    std::cout << "================================================================\n";
+    std::cout << "               INTERACTION LOGS PER PATIENT\n";
+    std::cout << "================================================================\n";
+
+    std::cout << "Enter Patient ID: ";
+    int id;
+    std::cin >> id;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input!\n";
+        std::cout << "Press enter to continue...";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+    std::cin.ignore();
+
+    std::string patientName = "";
+    for (Patient& p : patients) {
+        if (p.id == id) {
+            patientName = p.name;
+            break;
+        }
+    }
+
+    if (patientName.empty()) {
+        std::cout << "Patient ID not found.\n";
+        std::cout << "Press enter to continue...";
+        std::cin.get();
+        return;
+    }
+
+    system("cls");
+
+    std::cout << "================================================================\n";
+    std::cout << "                   INTERACTION LOGS\n";
+    std::cout << "Patient: " << patientName << "\n";
+    std::cout << "================================================================\n\n";
+
+    bool found = false;
+
+    for (const Interactions& i : interactions) {
+        if (i.patientId != id) {
+            continue;
+        }
+
+        found = true;
+        std::cout << "[" << i.id << "] " << i.type << "\n";
+        std::cout << "    Date      : " << i.date << "\n";
+        std::cout << "    Note      : " << i.note << "\n";
+        std::cout << "    Logged at : " << i.loggedAt << "\n\n";
+    }
+
+    if (!found) {
+        std::cout << "No interaction logs found for this patient.\n";
+    }
+
+    std::cout << "Press enter to continue...";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}

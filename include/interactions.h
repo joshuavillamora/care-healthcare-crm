@@ -20,5 +20,6 @@ Interaction deserializeInteractionRecord(const std::string& line);
 void saveInteractionLogs();
 void loadInteractionLogs();
 void viewInteractionLogs();
+void viewLogsByPatient();
 
 #endif

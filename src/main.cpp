@@ -127,7 +127,7 @@ void interactionsModule() {
                 viewInteractionLogs();
                 break;
             case 3:
-                std::cout << "This is view logs per patient.\n";
+                viewLogsByPatient();
                 break;
             case 4:
                 std::cout << "This is delete logs.\n";
