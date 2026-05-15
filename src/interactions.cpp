@@ -286,8 +286,8 @@ void deleteInteractionLog() {
         std::cin.ignore();
         if (choice == 'y' || choice == 'Y') {
             valid = true;
-            deleteRecord(patients, id);
-            savePatientRecords();
+            deleteRecord(interactions, id);
+            saveInteractionLogs();
             std::cout << "Interaction log deleted successfully.\n";
         } else if (choice == 'n' || choice == 'N') {
             valid = true;
