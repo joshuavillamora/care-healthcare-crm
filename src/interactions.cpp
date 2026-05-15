@@ -267,23 +267,6 @@ void deleteInteractionLog() {
         std::cout << "Note:        " << i.note         << "\n";
         std::cout << "Date:        " << i.age          << "\n";
         std::cout << "Logged at:   " << i.address      << "\n\n";
-
-        /*
-        
-struct Interaction {
-    int id;
-    int patientId;
-    std::string type;
-    std::string note;
-    std::string date;
-    std::string loggedAt;
-};
-        std::cout << "[" << i.id << "] " << i.date << " | "
-                  << "Patient #" << i.patientId << " | "
-                  << i.type << "\n";
-        std::cout << "    Note: " << i.note << "\n";
-        std::cout << "    Logged at: " << i.loggedAt << "\n\n";
-        */
     }
 
     if (!found) {
