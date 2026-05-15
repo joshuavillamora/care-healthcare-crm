@@ -237,3 +237,83 @@ void viewLogsByPatient() {
     std::cout << "Press enter to continue...";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
+
+void deleteInteractionLog() {
+    int id;
+    bool found = false;
+
+    system("cls");
+    
+    std::cout << "====================================\n";
+    std::cout << "       DELETE INTERACTION LOG\n";
+    std::cout << "====================================\n";
+
+    std::cout << "Enter Log ID to delete: ";
+    std::cin >> id;
+
+    for (Interaction& i : interacions) {
+        if (p.id != id) {
+            continue;
+        }
+
+        found = true;
+        system("cls");
+        std::cout << "===========================================\n";
+        std::cout << "       INTERACTION LOG TO BE DELETED\n";
+        std::cout << "===========================================\n";
+        std::cout << "Log ID:      " << i.id           << "\n";
+        std::cout << "Patient ID:  " << i.patientId    << "\n";
+        std::cout << "Type:        " << i.type         << "\n";
+        std::cout << "Note:        " << i.note         << "\n";
+        std::cout << "Date:        " << i.age          << "\n";
+        std::cout << "Logged at:   " << i.address      << "\n\n";
+
+        /*
+        
+struct Interaction {
+    int id;
+    int patientId;
+    std::string type;
+    std::string note;
+    std::string date;
+    std::string loggedAt;
+};
+        std::cout << "[" << i.id << "] " << i.date << " | "
+                  << "Patient #" << i.patientId << " | "
+                  << i.type << "\n";
+        std::cout << "    Note: " << i.note << "\n";
+        std::cout << "    Logged at: " << i.loggedAt << "\n\n";
+        */
+    }
+
+    if (!found) {
+        std::cout << "Log ID not found.\n";
+        std::cout << "Press enter to continue...";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+
+    char choice;
+    bool valid = false;
+
+    do {
+        std::cout << "Are you sure you want to delete this interaction log? (Y/N)\n";
+        std::cout << ">> ";
+        std::cin >> choice;
+        std::cin.ignore();
+        if (choice == 'y' || choice == 'Y') {
+            valid = true;
+            deleteRecord(patients, id);
+            savePatientRecords();
+            std::cout << "Interaction log deleted successfully.\n";
+        } else if (choice == 'n' || choice == 'N') {
+            valid = true;
+            std::cout << "Deletion cancelled...\n";
+        } else {    
+            std::cout << "Invalid input! Please enter Y or N.\n";
+        }
+    } while (!valid);
+
+    std::cout << "Press enter to continue...";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
