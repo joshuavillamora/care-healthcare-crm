@@ -160,15 +160,23 @@ void viewInteractionLogs() {
     std::cout << "                        INTERACTION LOGS\n";
     std::cout << "================================================================\n";
               
-    for (Interaction& i : interactions) {
-        Patient p;
+    if (interactions.empty()) {
+        std::cout << "No interaction logs found.\n";
+        std::cout << "Press enter to continue...";
+        std::cin.ignore();
+        std::cin.get();
+        return;
+    }
 
+    for (int idx = interactions.size() - 1; idx >= 0; idx--) {
+        Interaction& i = interactions[idx];
         std::cout << "[" << i.id << "] " << i.date << " | "
                   << "Patient #" << i.patientId << " | "
                   << i.type << "\n";
         std::cout << "    Note: " << i.note << "\n";
         std::cout << "    Logged at: " << i.loggedAt << "\n\n";
     }
+
     std::cout << "Press enter to continue...";
     std::cin.ignore();
     std::cin.get();
@@ -218,7 +226,7 @@ void viewLogsByPatient() {
 
     bool found = false;
 
-    for (const Interactions& i : interactions) {
+    for (const Interaction& i : interactions) {
         if (i.patientId != id) {
             continue;
         }
@@ -250,9 +258,18 @@ void deleteInteractionLog() {
 
     std::cout << "Enter Log ID to delete: ";
     std::cin >> id;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input!\n";
+        std::cout << "Press enter to continue...";
+        std::cin.get();
+        return;
+    }
+    std::cin.ignore();
 
-    for (Interaction& i : interacions) {
-        if (p.id != id) {
+    for (Interaction& i : interactions) {
+        if (i.id != id) {
             continue;
         }
 
@@ -267,6 +284,7 @@ void deleteInteractionLog() {
         std::cout << "Note:        " << i.note         << "\n";
         std::cout << "Date:        " << i.date         << "\n";
         std::cout << "Logged at:   " << i.loggedAt     << "\n\n";
+        break;
     }
 
     if (!found) {
