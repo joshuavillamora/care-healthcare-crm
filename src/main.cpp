@@ -43,6 +43,10 @@ int main() {
         if (currentUser.role == "staff") {
             staffMenu();
         }
+
+        if (currentUser.role == "patient") {
+            patientMenu();
+        }
     }
 
     return 0;
