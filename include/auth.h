@@ -22,6 +22,8 @@ void login();
 void staffLogin();
 void patientLogin();
 void seedAdminAccount();
+void seedStaffAccount();
+void seedPatientAccount();
 std::string serializeUser(const User& u);
 User deserializeUser(const std::string& line);
 void saveUsers();

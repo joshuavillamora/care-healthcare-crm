@@ -169,8 +169,6 @@ void patientLogin() {
 }
 
 void seedAdminAccount() {
-    if (!users.empty()) return;
-
     User admin;
     admin.id              = 1;
     admin.username        = "admin";
@@ -179,6 +177,30 @@ void seedAdminAccount() {
     admin.linkedPatientId = -1;
 
     users.push_back(admin);
+    saveUsers();
+}
+
+void seedStaffAccount() {
+    User staff;
+    staff.id              = 1;
+    staff.username        = "staff";
+    staff.passwordHash    = hashPassword("staff123");
+    staff.role            = "staff";
+    staff.linkedPatientId = -1;
+
+    users.push_back(staff);
+    saveUsers();
+}
+
+void seedPatientAccount() {
+    User patient;
+    patient.id              = 1;
+    patient.username        = "patient";
+    patient.passwordHash    = hashPassword("patient123");
+    patient.role            = "patient";
+    patient.linkedPatientId = -1;
+
+    users.push_back(patient);
     saveUsers();
 }
 

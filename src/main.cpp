@@ -13,7 +13,11 @@ void interactionsModule();
 int main() {
     int choice;
 
-    seedAdminAccount();
+    if (users.empty()) {
+        seedAdminAccount();
+        seedStaffAccount();
+        seedPatientAccount();
+    }
 
     while (!isLoggedIn && !exitRequested) {
         login();
