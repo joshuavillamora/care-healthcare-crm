@@ -164,7 +164,7 @@ void printAdminMenu() {
     std::cout << "3. Interaction Logs\n";
     std::cout << "4. Reports\n";
     std::cout << "5. User Management\n";
-    std::cout << "6. Exit\n";
+    std::cout << "6. Logout\n";
 }
 
 void printStaffMenu() {
@@ -175,7 +175,7 @@ void printStaffMenu() {
     std::cout << "2. Transaction Management\n";
     std::cout << "3. Interaction Logs\n";
     std::cout << "4. Reports\n";
-    std::cout << "5. Exit\n";
+    std::cout << "5. Logout\n";
 }
 
 void printPatientMenu() {
