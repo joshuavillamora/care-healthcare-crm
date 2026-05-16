@@ -1,5 +1,6 @@
 #include "../include/transactions.h"
 #include "../include/database.h"
+#include "../include/auth.h"
 
 #include <iostream>
 #include <iomanip>
@@ -286,4 +287,28 @@ void deleteTransaction(std::vector<Transaction>& transactions) {
     } else {
         std::cout << "\nDeletion cancelled.\n";
     }
+}
+
+void viewMyTransactions() {
+    system("cls");
+    std::cout << "=============================\n";
+    std::cout << "      MY TRANSACTIONS\n";
+    std::cout << "=============================\n\n";
+
+    bool found = false;
+    for (Transaction& t : transactions) {
+        if (t.patientId != currentUser.linkedPatientId) continue;
+
+        found = true;
+        std::cout << "[" << t.id << "] " << t.date << "\n";
+        std::cout << "    Service : " << t.serviceType  << "\n";
+        std::cout << "    Amount  : PHP " << std::fixed << std::setprecision(2) << t.amount << "\n";
+        std::cout << "    Note    : " << t.description  << "\n\n";
+    }
+
+    if (!found) std::cout << "No transactions found.\n";
+
+    std::cout << "Press enter to continue...";
+    std::cin.ignore();
+    std::cin.get();
 }
