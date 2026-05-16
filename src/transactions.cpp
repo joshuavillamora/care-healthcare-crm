@@ -1,6 +1,7 @@
 #include "../include/transactions.h"
 #include "../include/database.h"
 #include "../include/auth.h"
+#include "../include/patients.h"
 
 #include <iostream>
 #include <iomanip>
@@ -54,67 +55,185 @@ void loadTransactionRecords() {
     );
 }
 
+static std::string getPatientName(int patientId) {
+    for (const Patient& p : patients) {
+        if (p.id == patientId) {
+            return p.name;
+        }
+    }
+    return "Unknown";
+}
+
+static void printTransaction(const Transaction& t) {
+    std::cout << "Transaction ID : " << t.id          << "\n";
+    std::cout << "Patient ID     : " << t.patientId   << "\n";
+    std::cout << "Patient Name   : " << getPatientName(t.patientId) << "\n";
+    std::cout << "Date           : " << t.date        << "\n";
+    std::cout << "Amount         : " << std::fixed << std::setprecision(2) << t.amount << "\n";
+    std::cout << "Service Type   : " << t.serviceType << "\n";
+    std::cout << "Description    : " << t.description << "\n";
+    std::cout << "-----------------------------\n";
+}
+
+void viewAllTransactionHistory() {
+    if (transactions.empty()) {
+        std::cout << "\nNo transactions found.\n";
+        return;
+    }
+
+    std::cout << "\n=============================" << "\n";
+    std::cout << "      ALL TRANSACTION HISTORY" << "\n";
+    std::cout << "=============================\n";
+
+    for (const Transaction& t : transactions) {
+        printTransaction(t);
+    }
+}
+
+// VIEW BY PATIENT
+void viewTransactionsByPatient() {
+    if (transactions.empty()) {
+        std::cout << "\nNo transactions found.\n";
+        return;
+    }
+
+    std::cout << "\nEnter Patient ID: ";
+    int patientId;
+    while (!(std::cin >> patientId)) {
+        std::cout << "Invalid input. Enter a number: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::string name = getPatientName(patientId);
+    if (name == "Unknown") {
+        std::cout << "\nNo patient found with ID " << patientId << ".\n";
+        return;
+    }
+
+    std::cout << "\n=============================\n";
+    std::cout << "  TRANSACTIONS FOR " << name << "\n";
+    std::cout << "=============================\n";
+
+    bool found = false;
+    float total = 0;
+
+    for (const Transaction& t : transactions) {
+        if (t.patientId == patientId) {
+            printTransaction(t);
+            total += t.amount;
+            found = true;
+        }
+    }
+
+    if (!found)
+        std::cout << "No transactions found for this patient.\n";
+    else
+        std::cout << "Total Spent: PHP " << std::fixed
+                  << std::setprecision(2) << total << "\n";
+}
+
+// SEARCH
+static std::string toLower(const std::string& value) {
+    std::string lower = value;
+    std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+    return lower;
+}
+
+static bool containsIgnoreCase(const std::string& text, const std::string& query) {
+    return toLower(text).find(toLower(query)) != std::string::npos;
+}
+
+void searchTransactions() {
+    if (transactions.empty()) {
+        std::cout << "\nNo transactions found.\n";
+        return;
+    }
+
+    std::cout << "\nEnter search term (service type, description, date, patient name): ";
+    std::string query;
+    std::getline(std::cin, query);
+
+    if (query.empty()) {
+        std::cout << "No search term entered.\n";
+        return;
+    }
+
+    std::cout << "\nSearch results for '" << query << "':\n";
+    std::cout << "=============================\n";
+
+    bool found = false;
+    for (const Transaction& t : transactions) {
+        if (containsIgnoreCase(t.date,                      query) ||
+            containsIgnoreCase(t.serviceType,               query) ||
+            containsIgnoreCase(t.description,               query) ||
+            containsIgnoreCase(getPatientName(t.patientId), query)) {
+            printTransaction(t);
+            found = true;
+        }
+    }
+
+    if (!found)
+        std::cout << "No matching transactions found.\n";
+}
+
 // MENU
 void transactionManagement() {
      loadTransactionRecords();
 
     int choice;
-
     do {
-
         std::cout << "=============================\n";
         std::cout << "    TRANSACTION MANAGEMENT\n";
         std::cout << "=============================\n";
         std::cout << "1. Add Transaction\n";
-        std::cout << "2. View Transactions\n";
-        std::cout << "3. Edit Transaction\n";
-        std::cout << "4. Delete Transaction\n";
-        std::cout << "5. Back\n";
+        std::cout << "2. View All Transactions\n";
+        std::cout << "3. View Transactions per Patient\n";
+        std::cout << "4. Search Transactions\n";
+        std::cout << "5. Edit Transaction\n";
+        std::cout << "6. Delete Transaction\n";
+        std::cout << "7. Back\n";
         std::cout << "Enter choice: ";
 
         std::cin >> choice;
         while (std::cin.fail()) {
-
             std::cout << "Invalid input. Enter a number: ";
-
             std::cin.clear();
-
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
             std::cin >> choice;
         }
 
         switch (choice) {
-
             case 1:
                 addTransaction(transactions);
                 saveTransactionRecords();
                 break;
-
             case 2:
-                viewTransactions(transactions);
+                viewAllTransactionHistory();
                 break;
-
             case 3:
+                viewTransactionsByPatient(); 
+                break;
+            case 4:
+                searchTransactions();    
+                break;
+            case 5:
                 editTransaction(transactions);
                 saveTransactionRecords();
                 break;
-
-            case 4:
+            case 6:
                 deleteTransaction(transactions);
                 saveTransactionRecords();
                 break;
-
-            case 5:
+            case 7:
                 std::cout << "Returning to main menu...\n";
                 break;
-
             default:
                 std::cout << "Invalid option! Try again.\n";
                 break;
         }
-
-    } while (choice != 5);
+    } while (choice != 7);
 }
 
 // ADD TRANSACTION
@@ -164,7 +283,7 @@ void viewTransactions(const std::vector<Transaction>& transactions) {
     }
 
     std::cout << "\n=============================\n";
-    std::cout << "       TRANSACTION LIST\n";
+    std::cout << "      ALL TRANSACTIONS\n";
     std::cout << "=============================\n";
 
     for (const Transaction& t : transactions) {
@@ -176,6 +295,42 @@ void viewTransactions(const std::vector<Transaction>& transactions) {
         std::cout << "Description    : " << t.description << "\n";
         std::cout << "-----------------------------\n";
     }
+
+    std::cout << "\nEnter Patient ID: ";
+    int patientId;
+    while (!(std::cin >> patientId)) {
+        std::cout << "Invalid input. Enter a number: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::string name = getPatientName(patientId);
+    if (name == "Unknown") {
+        std::cout << "\nNo patient found with ID " << patientId << ".\n";
+        return;
+    }
+
+    std::cout << "\n=============================\n";
+    std::cout << "  TRANSACTIONS FOR " << name << "\n";
+    std::cout << "=============================\n";
+
+    bool found = false;
+    float total = 0;
+
+    for (const Transaction& t : transactions) {
+        if (t.patientId == patientId) {
+            printTransaction(t);
+            total += t.amount;
+            found = true;
+        }
+    }
+
+    if (!found)
+        std::cout << "No transactions found for this patient.\n";
+    else
+        std::cout << "Total Spent: PHP " << std::fixed
+                  << std::setprecision(2) << total << "\n";
 }
 
 // EDIT TRANSACTION
