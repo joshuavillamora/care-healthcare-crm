@@ -1,6 +1,7 @@
 #include "../include/patients.h"
 #include "../include/interactions.h"
 #include "../include/transactions.h"
+#include "../include/auth.h"
 
 #include <iostream>
 #include <limits>
@@ -12,7 +13,7 @@ void interactionsModule();
 int main() {
     int choice;
 
-    
+    login();
 
     do {
         system("cls");
