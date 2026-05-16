@@ -107,6 +107,9 @@ void patientManagementModule() {
 void interactionsModule() {
     int choice;
     
+    loadInteractionLogs();
+    loadPatientRecords();
+
     do {
         printInteractionsMenu();
 
@@ -119,13 +122,13 @@ void interactionsModule() {
 
         switch (choice) {
             case 1:
-                std::cout << "This is add interaction log.\n";
+                addInteractionRecord();
                 break;
             case 2:
-                std::cout << "This is view all logs.\n";
+                viewInteractionLogs();
                 break;
             case 3:
-                std::cout << "This is view logs per patient.\n";
+                viewLogsByPatient();
                 break;
             case 4:
                 std::cout << "This is delete logs.\n";

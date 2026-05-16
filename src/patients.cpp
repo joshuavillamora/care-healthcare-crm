@@ -382,7 +382,11 @@ void searchPatientRecord() {
     do {
         std::cout << ">> ";
         std::cin >> choice;
-        std::cin.ignore();
+        
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
 
         if (choice == 1) {
             valid = true;
