@@ -166,3 +166,17 @@ void patientLogin() {
         }
     }
 }
+
+void seedAdminAccount() {
+    if (!users.empty()) return;
+
+    User admin;
+    admin.id              = 1;
+    admin.username        = "admin";
+    admin.passwordHash    = hashPassword("admin123");
+    admin.role            = "admin";
+    admin.linkedPatientId = -1;
+
+    users.push_back(admin);
+    saveUsers();
+}

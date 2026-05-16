@@ -20,5 +20,6 @@ std::string hashPassword(const std::string& password);
 void login();
 void staffLogin();
 void patientLogin();
+void seedAdminAccount();
 
 #endif

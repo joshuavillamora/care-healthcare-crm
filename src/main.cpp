@@ -13,6 +13,8 @@ void interactionsModule();
 int main() {
     int choice;
 
+    seedAdminAccount();
+
     while (!isLoggedIn && !exit) {
         login();
     }
