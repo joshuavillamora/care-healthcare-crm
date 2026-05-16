@@ -1,4 +1,5 @@
 #include "../include/auth.h"
+#include "../include/patients.h"
 
 #include <iostream>
 #include <limits>
@@ -34,7 +35,7 @@ void login() {
             staffLogin(); 
             break;
         case 2:
-            std::cout << "Patient Login";
+            patientLogin();
             break;
         case 3: 
             exit = true;
@@ -92,6 +93,69 @@ void staffLogin() {
             system("cls");
             std::cout << "Welcome, " << currentUser.username
                       << "! (" << currentUser.role << ")\n";
+            std::cout << "Press enter to continue...";
+            std::cin.get();
+            return;
+        }
+
+        if (!found) {
+            std::cout << "User not found. Try again.\n\n";
+        }
+    }
+}
+
+void patientLogin() {
+    system("cls");
+
+    std::cout << "================================\n";
+    std::cout << "        PATIENT LOGIN\n";
+    std::cout << "================================\n";
+    std::cout << "Enter 'cancel' as username to go back.\n\n";
+
+    while (true) {
+        std::string username, password;
+
+        std::cout << "Username: ";
+        std::cin >> username;
+
+        if (username == "cancel") {
+            std::cout << "Login cancelled.\n";
+            return;
+        }
+
+        std::cout << "Password: ";
+        std::cin >> password;
+        std::cin.ignore();
+
+        std::string hashed = hashPassword(password);
+
+        bool found = false;
+        for (User& u : users) {
+            if (u.username != username) continue;
+            if (u.role != "patient") continue;
+
+            found = true;
+
+            if (u.passwordHash != hashed) {
+                std::cout << "Incorrect password. Try again.\n\n";
+                break;
+            }
+
+            currentUser = u;
+            isLoggedIn  = true;
+            system("cls");
+
+            std::string patientName = currentUser.username;
+            for (Patient& p : patients) {
+                if (p.id == currentUser.linkedPatientId) {
+                    patientName = p.name;
+                    break;
+                }
+            }
+
+            std::cout << "================================\n";
+            std::cout << "     WELCOME, " << patientName << "\n";
+            std::cout << "================================\n";
             std::cout << "Press enter to continue...";
             std::cin.get();
             return;
