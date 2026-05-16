@@ -16,6 +16,9 @@ void staffMenu();
 void adminMenu();
 
 int main() {
+    loadPatientRecords();
+    loadInteractionLogs();
+
     if (users.empty()) {
         seedAdminAccount();
         seedStaffAccount();
@@ -145,9 +148,7 @@ void printAdminMenu() {
 
 void patientManagementModule() {
     int choice;
-    
-    loadPatientRecords();
-    
+
     do {
         printPatientManagementMenu();
 
@@ -187,9 +188,6 @@ void patientManagementModule() {
 
 void interactionsModule() {
     int choice;
-    
-    loadInteractionLogs();
-    loadPatientRecords();
 
     do {
         printInteractionsMenu();
