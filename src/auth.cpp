@@ -198,7 +198,7 @@ void seedPatientAccount() {
     patient.username        = "patient";
     patient.passwordHash    = hashPassword("patient123");
     patient.role            = "patient";
-    patient.linkedPatientId = -1;
+    patient.linkedPatientId = 11;
 
     users.push_back(patient);
     saveUsers();
