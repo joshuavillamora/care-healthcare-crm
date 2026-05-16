@@ -13,7 +13,14 @@ void interactionsModule();
 int main() {
     int choice;
 
-    login();
+    while (!isLoggedIn && !exit) {
+        login();
+    }
+
+    if (!isLoggedIn) {
+        std::cout << "Thank you for using Clinical Activity and Records Engine!\n";
+        return 0;
+    }
 
     do {
         system("cls");

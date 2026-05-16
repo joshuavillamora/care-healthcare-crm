@@ -18,5 +18,6 @@ extern std::vector<User> users;
 
 std::string hashPassword(const std::string& password);
 void login();
+void staffLogin();
 
 #endif

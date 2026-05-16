@@ -5,6 +5,11 @@
 #include <stdlib.h>
 #include <functional>
 
+std::vector<User> users;
+User currentUser;
+bool isLoggedIn = false;
+bool exit = false;
+
 void login() {
     system("cls");
 
@@ -18,16 +23,21 @@ void login() {
 
     int choice;
     std::cin >> choice;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    std::cin.ignore();
 
     switch (choice) {
         case 1:
-            std::cout << "Staff Login"; 
+            staffLogin(); 
             break;
         case 2:
             std::cout << "Patient Login";
             break;
         case 3: 
+            exit = true;
             return;
         default:
             std::cout << "Invalid input.\n";
@@ -38,4 +48,57 @@ void login() {
 std::string hashPassword(const std::string& password) {
     std::hash<std::string> hasher;
     return std::to_string(hasher(password));
+}
+
+void staffLogin() {
+    system("cls");
+
+    std::cout << "================================\n";
+    std::cout << "         STAFF LOGIN\n";
+    std::cout << "================================\n";
+    std::cout << "Enter 'cancel' as username to go back.\n\n";
+
+    while (true) {
+        std::string username, password;
+
+        std::cout << "Username: ";
+        std::cin >> username;
+
+        if (username == "cancel") {
+            std::cout << "Login cancelled.\n";
+            return;
+        }
+
+        std::cout << "Password: ";
+        std::cin >> password;
+        std::cin.ignore();
+
+        std::string hashed = hashPassword(password);
+
+        bool found = false;
+        for (User& u : users) {
+            if (u.username != username) continue;
+            if (u.role == "patient") continue;
+
+            found = true;
+
+            if (u.passwordHash != hashed) {
+                std::cout << "Incorrect password. Try again.\n\n";
+                break;
+            }
+
+            currentUser = u;
+            isLoggedIn  = true;
+            system("cls");
+            std::cout << "Welcome, " << currentUser.username
+                      << "! (" << currentUser.role << ")\n";
+            std::cout << "Press enter to continue...";
+            std::cin.get();
+            return;
+        }
+
+        if (!found) {
+            std::cout << "User not found. Try again.\n\n";
+        }
+    }
 }
