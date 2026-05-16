@@ -13,6 +13,8 @@ struct Transaction {
     std::string description;
 };      
 
+extern std::vector<Transaction> transactions;
+
 //menu
 void transactionManagement();
 
@@ -25,6 +27,11 @@ void deleteTransaction (std::vector <Transaction>& transactions);
 // persistence 
 void saveTransactionRecords();
 void loadTransactionRecords();
+
+// history
+void viewAllTransactionHistory();
+void viewTransactionsByPatient();
+void searchTransactions();   
 
 // patient view
 void viewMyTransactions();
