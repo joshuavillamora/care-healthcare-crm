@@ -15,7 +15,7 @@ int main() {
 
     seedAdminAccount();
 
-    while (!isLoggedIn && !exit) {
+    while (!isLoggedIn && !exitRequested) {
         login();
     }
 

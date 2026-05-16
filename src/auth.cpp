@@ -10,7 +10,7 @@
 std::vector<User> users;
 User currentUser;
 bool isLoggedIn = false;
-bool exit = false;
+bool exitRequested = false;
 
 void login() {
     system("cls");
@@ -39,7 +39,7 @@ void login() {
             patientLogin();
             break;
         case 3: 
-            exit = true;
+            exitRequested = true;
             return;
         default:
             std::cout << "Invalid input.\n";

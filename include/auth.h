@@ -14,6 +14,7 @@ struct User {
 
 extern User currentUser;
 extern bool isLoggedIn;
+extern bool exitRequested;
 extern std::vector<User> users;
 
 std::string hashPassword(const std::string& password);
