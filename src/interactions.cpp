@@ -318,3 +318,28 @@ void deleteInteractionLog() {
     std::cout << "Press enter to continue...";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
+
+void viewMyInteractionLogs() {
+    system("cls");
+    std::cout << "=============================\n";
+    std::cout << "    MY INTERACTION LOGS\n";
+    std::cout << "=============================\n\n";
+
+    bool found = false;
+    for (int idx = interactions.size() - 1; idx >= 0; idx--) {
+        Interaction& i = interactions[idx];
+        if (i.patientId != currentUser.linkedPatientId) continue;
+
+        found = true;
+        std::cout << "[" << i.id << "] " << i.type << "\n";
+        std::cout << "    Date      : " << i.date      << "\n";
+        std::cout << "    Note      : " << i.note      << "\n";
+        std::cout << "    Logged at : " << i.loggedAt  << "\n\n";
+    }
+
+    if (!found) std::cout << "No interaction logs found.\n";
+
+    std::cout << "Press enter to continue...";
+    std::cin.ignore();
+    std::cin.get();
+}
