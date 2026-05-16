@@ -288,13 +288,7 @@ void viewTransactions(const std::vector<Transaction>& transactions) {
     std::cout << "=============================\n";
 
     for (const Transaction& t : transactions) {
-        std::cout << "Transaction ID : " << t.id          << "\n";
-        std::cout << "Patient ID     : " << t.patientId   << "\n";
-        std::cout << "Date           : " << t.date        << "\n";
-        std::cout << "Amount         : " << std::fixed << std::setprecision(2) << t.amount << "\n";
-        std::cout << "Service Type   : " << t.serviceType << "\n";
-        std::cout << "Description    : " << t.description << "\n";
-        std::cout << "-----------------------------\n";
+        printTransaction(t);
     }
 
     std::cout << "\nEnter Patient ID: ";
