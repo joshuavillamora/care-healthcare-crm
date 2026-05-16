@@ -265,8 +265,8 @@ void deleteInteractionLog() {
         std::cout << "Patient ID:  " << i.patientId    << "\n";
         std::cout << "Type:        " << i.type         << "\n";
         std::cout << "Note:        " << i.note         << "\n";
-        std::cout << "Date:        " << i.age          << "\n";
-        std::cout << "Logged at:   " << i.address      << "\n\n";
+        std::cout << "Date:        " << i.date         << "\n";
+        std::cout << "Logged at:   " << i.loggedAt     << "\n\n";
     }
 
     if (!found) {
