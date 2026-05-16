@@ -124,15 +124,35 @@ void staffMenu() {
     } while (choice != 5);
 }
 
-void printStaffMenu() {
-    std::cout << "=============================\n";
-    std::cout << "    HEALTHCARE CRM SYSTEM\n";
-    std::cout << "=============================\n";
-    std::cout << "1. Patient Management\n";
-    std::cout << "2. Transaction Management\n";
-    std::cout << "3. Interaction Logs\n";
-    std::cout << "4. Reports\n";
-    std::cout << "5. Exit\n";
+void patientMenu() {
+    int choice;
+    do {
+        system("cls");
+        printPatientMenu();
+
+        std::cin >> choice;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
+        switch (choice) {
+            case 1: 
+                viewMyRecords();             
+                break;
+            case 2: 
+                viewMyTransactions();        
+                break;
+            case 3: 
+                viewMyInteractionLogs();     
+                break;
+            case 4: 
+                return;
+            default:
+                std::cout << "Invalid option!\n";
+                break;
+        }
+    } while (choice != 4);
 }
 
 void printAdminMenu() {
@@ -145,6 +165,28 @@ void printAdminMenu() {
     std::cout << "4. Reports\n";
     std::cout << "5. User Management\n";
     std::cout << "6. Exit\n";
+}
+
+void printStaffMenu() {
+    std::cout << "=============================\n";
+    std::cout << "    HEALTHCARE CRM SYSTEM\n";
+    std::cout << "=============================\n";
+    std::cout << "1. Patient Management\n";
+    std::cout << "2. Transaction Management\n";
+    std::cout << "3. Interaction Logs\n";
+    std::cout << "4. Reports\n";
+    std::cout << "5. Exit\n";
+}
+
+void printPatientMenu() {
+    std::cout << "=============================\n";
+    std::cout << "    HEALTHCARE CRM SYSTEM\n";
+    std::cout << "=============================\n";
+    std::cout << "Welcome, " << currentUser.username << "\n\n";
+    std::cout << "1. View My Records\n";
+    std::cout << "2. View My Transactions\n";
+    std::cout << "3. View My Interaction Logs\n";
+    std::cout << "4. Logout\n";
 }
 
 void patientManagementModule() {
