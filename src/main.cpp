@@ -9,11 +9,13 @@
 
 void printStaffMenu();
 void printAdminMenu();
+void printPatientMenu();
 void patientManagementModule();
 void interactionsModule();
 void reportsModule();
 void staffMenu();
 void adminMenu();
+void patientMenu();
 
 int main() {
     loadUsers();
