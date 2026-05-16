@@ -7,6 +7,7 @@
 #include <limits>
 
 void printHomePage();
+void printAdminHomePage();
 void patientManagementModule();
 void interactionsModule();
 void reportsModule();
@@ -29,6 +30,10 @@ int main() {
             return 0;
         }
 
+        if (currentUser.role == "admin") {
+            adminMenu();
+        }
+
         if (currentUser.role == "staff") {
             staffMenu();
         }
@@ -36,6 +41,46 @@ int main() {
 
     return 0;
 }
+
+void adminMenu() {
+    int choice;
+    do {
+        system("cls");
+        printAdminHomePage();
+
+        std::cin >> choice;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
+        switch (choice) {
+            case 1:
+                patientManagementModule();
+                break;
+            case 2:                
+                transactionManagement();
+                break;
+            case 3:
+                interactionsModule();
+                break;
+            case 4:
+                reportsModule();
+                break;
+            case 5:
+                userManagement();
+                break;
+            case 6:
+                return;
+                break;
+            default:
+                std::cout << "Invalid option! Try again. (1-5)\n";
+                break;
+        }
+    } while (choice != 5);
+}
+
 
 void staffMenu() {
     int choice;
@@ -82,6 +127,18 @@ void printHomePage() {
     std::cout << "3. Interaction Logs\n";
     std::cout << "4. Reports\n";
     std::cout << "5. Exit\n";
+}
+
+void printAdminHomePage() {
+    std::cout << "=============================\n";
+    std::cout << "    HEALTHCARE CRM SYSTEM\n";
+    std::cout << "=============================\n";
+    std::cout << "1. Patient Management\n";
+    std::cout << "2. Transaction Management\n";
+    std::cout << "3. Interaction Logs\n";
+    std::cout << "4. Reports\n";
+    std::cout << "5. User Management\n";
+    std::cout << "6. Exit\n";
 }
 
 void patientManagementModule() {
