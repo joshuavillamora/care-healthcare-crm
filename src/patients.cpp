@@ -471,3 +471,26 @@ void searchPatientByName() {
         return;
     }
 }
+
+void viewMyRecords() {
+    system("cls");
+    std::cout << "=============================\n";
+    std::cout << "         MY RECORDS\n";
+    std::cout << "=============================\n\n";
+
+    for (Patient& p : patients) {
+        if (p.id != currentUser.linkedPatientId) continue;
+
+        std::cout << "ID:      " << p.id      << "\n";
+        std::cout << "Name:    " << p.name    << "\n";
+        std::cout << "Phone:   " << p.phone   << "\n";
+        std::cout << "Email:   " << p.email   << "\n";
+        std::cout << "Age:     " << p.age     << "\n";
+        std::cout << "Address: " << p.address << "\n";
+        break;
+    }
+
+    std::cout << "\nPress enter to continue...";
+    std::cin.ignore();
+    std::cin.get();
+}
