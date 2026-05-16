@@ -10,25 +10,35 @@ void printHomePage();
 void patientManagementModule();
 void interactionsModule();
 void reportsModule();
+void staffMenu();
 
 int main() {
-    int choice;
-
     if (users.empty()) {
         seedAdminAccount();
         seedStaffAccount();
         seedPatientAccount();
     }
 
-    while (!isLoggedIn && !exitRequested) {
-        login();
+    while (true) {
+        while (!isLoggedIn && !exitRequested) {
+            login();
+        }
+
+        if (!isLoggedIn) {
+            std::cout << "Thank you for using Clinical Activity and Records Engine!\n";
+            return 0;
+        }
+
+        if (currentUser.role == "staff") {
+            staffMenu();
+        }
     }
 
-    if (!isLoggedIn) {
-        std::cout << "Thank you for using Clinical Activity and Records Engine!\n";
-        return 0;
-    }
+    return 0;
+}
 
+void staffMenu() {
+    int choice;
     do {
         system("cls");
         printHomePage();
@@ -54,15 +64,13 @@ int main() {
                 reportsModule();
                 break;
             case 5:
-                std::cout << "Thank you for using Clinical Activity and Records Engine!\n";
+                return;
                 break;
             default:
                 std::cout << "Invalid option! Try again. (1-5)\n";
                 break;
         }
     } while (choice != 5);
-
-    return 0;
 }
 
 void printHomePage() {
