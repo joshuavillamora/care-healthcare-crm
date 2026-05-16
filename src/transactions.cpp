@@ -216,10 +216,11 @@ void transactionManagement() {
                 viewTransactionsByPatient(); 
                 break;
             case 4:
-                searchTransactions();    
+                editTransaction(transactions);
+                saveTransactionRecords();
                 break;
             case 5:
-                editTransaction(transactions);
+                deleteTransaction(transactions);
                 saveTransactionRecords();
                 break;
             case 6:
