@@ -8,6 +8,7 @@
 void printHomePage();
 void patientManagementModule();
 void interactionsModule();
+void reportsModule();
 
 int main() {
     int choice;
@@ -36,7 +37,7 @@ int main() {
                 interactionsModule();
                 break;
             case 4:
-                std::cout << "This is the Reporting Module.\n";
+                reportsModule();
                 break;
             case 5:
                 std::cout << "Thank you for using Clinical Activity and Records Engine!\n";
