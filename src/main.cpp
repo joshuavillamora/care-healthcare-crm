@@ -2,6 +2,7 @@
 #include "../include/interactions.h"
 #include "../include/transactions.h"
 #include "../include/auth.h"
+#include "../include/usermanagement.h"
 
 #include <iostream>
 #include <limits>
@@ -12,6 +13,7 @@ void patientManagementModule();
 void interactionsModule();
 void reportsModule();
 void staffMenu();
+void adminMenu();
 
 int main() {
     if (users.empty()) {
@@ -69,7 +71,7 @@ void adminMenu() {
                 reportsModule();
                 break;
             case 5:
-                userManagement();
+                userManagementModule();
                 break;
             case 6:
                 return;
@@ -78,7 +80,7 @@ void adminMenu() {
                 std::cout << "Invalid option! Try again. (1-5)\n";
                 break;
         }
-    } while (choice != 5);
+    } while (choice != 6);
 }
 
 
