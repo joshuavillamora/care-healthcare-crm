@@ -26,4 +26,7 @@ void deleteTransaction (std::vector <Transaction>& transactions);
 void saveTransactionRecords();
 void loadTransactionRecords();
 
+// patient view
+void viewMyTransactions();
+
 #endif

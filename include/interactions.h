@@ -22,5 +22,6 @@ void loadInteractionLogs();
 void viewInteractionLogs();
 void viewLogsByPatient();
 void deleteInteractionLog();
+void viewMyInteractionLogs();
 
 #endif

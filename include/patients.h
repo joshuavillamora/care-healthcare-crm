@@ -35,5 +35,6 @@ void deletePatientRecord();
 void searchPatientRecord();
 void searchPatientById();
 void searchPatientByName();
+void viewMyRecords();
 
 #endif
