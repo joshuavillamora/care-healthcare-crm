@@ -6,8 +6,8 @@
 #include <iostream>
 #include <limits>
 
-void printHomePage();
-void printAdminHomePage();
+void printStaffMenu();
+void printAdminMenu();
 void patientManagementModule();
 void interactionsModule();
 void reportsModule();
@@ -46,7 +46,7 @@ void adminMenu() {
     int choice;
     do {
         system("cls");
-        printAdminHomePage();
+        printAdminMenu();
 
         std::cin >> choice;
 
@@ -86,7 +86,7 @@ void staffMenu() {
     int choice;
     do {
         system("cls");
-        printHomePage();
+        printStaffMenu();
 
         std::cin >> choice;
 
@@ -118,7 +118,7 @@ void staffMenu() {
     } while (choice != 5);
 }
 
-void printHomePage() {
+void printStaffMenu() {
     std::cout << "=============================\n";
     std::cout << "    HEALTHCARE CRM SYSTEM\n";
     std::cout << "=============================\n";
@@ -129,7 +129,7 @@ void printHomePage() {
     std::cout << "5. Exit\n";
 }
 
-void printAdminHomePage() {
+void printAdminMenu() {
     std::cout << "=============================\n";
     std::cout << "    HEALTHCARE CRM SYSTEM\n";
     std::cout << "=============================\n";
