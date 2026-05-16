@@ -1,5 +1,6 @@
 #include "../include/patients.h"
 #include "../include/database.h"
+#include "../include/auth.h"
 
 #include <iostream>
 #include <stdlib.h>

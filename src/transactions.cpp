@@ -1,5 +1,6 @@
 #include "../include/transactions.h"
 #include "../include/database.h"
+#include "../include/auth.h"
 
 #include <iostream>
 #include <iomanip>

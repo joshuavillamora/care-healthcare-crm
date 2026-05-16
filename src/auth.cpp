@@ -13,7 +13,6 @@ bool isLoggedIn = false;
 bool exitRequested = false;
 
 void login() {
-    system("cls");
 
     std::cout << "================================================\n";
     std::cout << "        CLINICAL ACTIVITY RECORDS ENGINE\n";
