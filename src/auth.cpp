@@ -1,5 +1,6 @@
 #include "../include/auth.h"
 #include "../include/patients.h"
+#include "../include/database.h"
 
 #include <iostream>
 #include <limits>
