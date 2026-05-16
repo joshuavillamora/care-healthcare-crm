@@ -216,11 +216,10 @@ void transactionManagement() {
                 viewTransactionsByPatient(); 
                 break;
             case 4:
-                editTransaction(transactions);
-                saveTransactionRecords();
+                searchTransactions(); 
                 break;
             case 5:
-                deleteTransaction(transactions);
+                editTransaction(transactions);
                 saveTransactionRecords();
                 break;
             case 6:
@@ -305,27 +304,6 @@ void viewTransactions(const std::vector<Transaction>& transactions) {
         std::cout << "\nNo patient found with ID " << patientId << ".\n";
         return;
     }
-
-    std::cout << "\n=============================\n";
-    std::cout << "  TRANSACTIONS FOR " << name << "\n";
-    std::cout << "=============================\n";
-
-    bool found = false;
-    float total = 0;
-
-    for (const Transaction& t : transactions) {
-        if (t.patientId == patientId) {
-            printTransaction(t);
-            total += t.amount;
-            found = true;
-        }
-    }
-
-    if (!found)
-        std::cout << "No transactions found for this patient.\n";
-    else
-        std::cout << "Total Spent: PHP " << std::fixed
-                  << std::setprecision(2) << total << "\n";
 }
 
 // EDIT TRANSACTION
