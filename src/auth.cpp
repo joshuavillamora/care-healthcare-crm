@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <limits>
+#include <stdlib.h>
+#include <functional>
 
 void login() {
     system("cls");
@@ -31,4 +33,9 @@ void login() {
             std::cout << "Invalid input.\n";
             login();
     }
+}
+
+std::string hashPassword(const std::string& password) {
+    std::hash<std::string> hasher;
+    return std::to_string(hasher(password));
 }
