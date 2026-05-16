@@ -16,6 +16,7 @@ void staffMenu();
 void adminMenu();
 
 int main() {
+    loadUsers();
     loadPatientRecords();
     loadInteractionLogs();
 
