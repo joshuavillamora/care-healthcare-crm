@@ -180,3 +180,32 @@ void seedAdminAccount() {
     users.push_back(admin);
     saveUsers();
 }
+
+std::string serializeUser(const User& u) {
+    return std::to_string(u.id) + "|" + u.username + "|" + u.passwordHash + "|" + u.role + "|" + std::to_string(u.linkedPatientId);
+}
+
+User deserializeUser(const std::string& line) {
+    User u;
+    std::string id, linkedPatientId;
+    std::stringstream ss(line);
+
+    std::getline(ss, id,              '|');
+    std::getline(ss, u.username,      '|');
+    std::getline(ss, u.passwordHash,  '|');
+    std::getline(ss, u.role,          '|');
+    std::getline(ss, linkedPatientId, '\n');
+
+    u.id              = std::stoi(id);
+    u.linkedPatientId = std::stoi(linkedPatientId);
+
+    return u;
+}
+
+void saveUsers() {
+    saveRecords<User>("data/users.csv", users, serializeUser);
+}
+
+void loadUsers() {
+    loadRecords<User>("data/users.csv", users, deserializeUser);
+}
