@@ -368,6 +368,18 @@ void deletePatientRecord() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
+void printPatient(const Patient& p) {
+    std::cout << "===================================\n";
+    std::cout << "        PATIENT INFORMATION\n";
+    std::cout << "===================================\n";
+    std::cout << "ID:      " << p.id      << "\n";
+    std::cout << "Name:    " << p.name    << "\n";
+    std::cout << "Phone:   " << p.phone   << "\n";
+    std::cout << "Email:   " << p.email   << "\n";
+    std::cout << "Age:     " << p.age     << "\n";
+    std::cout << "Address: " << p.address << "\n\n";
+}
+
 void searchPatientRecord() {
     system("cls");
 
@@ -450,21 +462,25 @@ void searchPatientByName() {
 
     system("cls");
 
-    for (Patient& p : patients) {
-        if (p.name.find(name) == std::string::npos) {
-            continue;
-        }
+    int left = 0, right = (int)patients.size() - 1;
 
-        found = true;
-        std::cout << "===================================\n";
-        std::cout << "        PATIENT INFORMATION\n";
-        std::cout << "===================================\n";
-        std::cout << "ID:      " << p.id      << "\n";
-        std::cout << "Name:    " << p.name    << "\n";
-        std::cout << "Phone:   " << p.phone   << "\n";
-        std::cout << "Email:   " << p.email   << "\n";
-        std::cout << "Age:     " << p.age     << "\n";
-        std::cout << "Address: " << p.address << "\n\n";
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (patients[mid].name == name) {
+            int start = mid;
+            while (start > 0 && patients[start - 1].name == name) start--;
+
+            for (int i = start; i < (int)patients.size() && patients[i].name == name; i++) {
+                printPatient(patients[i]);
+            }
+            found = true;
+            break;
+        } else if (patients[mid].name < name) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
     }
 
     if (!found) {
